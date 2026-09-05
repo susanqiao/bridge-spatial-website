@@ -12,11 +12,21 @@ window.addEventListener('scroll', setHeaderState, { passive: true });
 menuButton?.addEventListener('click', () => {
   const open = nav.classList.toggle('open');
   menuButton.setAttribute('aria-expanded', String(open));
+  header?.classList.toggle('menu-open', open);
 });
 
 nav?.querySelectorAll('a').forEach((link) => {
   link.addEventListener('click', () => {
     nav.classList.remove('open');
+    header?.classList.remove('menu-open');
     menuButton?.setAttribute('aria-expanded', 'false');
   });
+});
+
+document.addEventListener('keydown', (event) => {
+  if (event.key === 'Escape') {
+    nav?.classList.remove('open');
+    header?.classList.remove('menu-open');
+    menuButton?.setAttribute('aria-expanded', 'false');
+  }
 });
